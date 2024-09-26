@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizbot - Welcome</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="{% static 'css/landing2.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+</head>
+<body>
+    <div class="container">
+        <div class="background-pattern"></div>
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brain-circuit-icon"><path d="M12 4.5a2.5 2.5 0 0 0-4.96-.46 2.5 2.5 0 0 0-1.98 3 2.5 2.5 0 0 0-1.32 4.24 3 3 0 0 0 .34 5.58 2.5 2.5 0 0 0 2.96 3.08 2.5 2.5 0 0 0 4.91.05L12 20V4.5Z"/><path d="M16 8V5c0-1.1.9-2 2-2"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M20.5 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/><path d="M16.5 13a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/><path d="M20.5 21a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/><path d="M18.5 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/></svg> {% endcomment %}
+                </div>
+                <img width="45px" height="40px" src="{% static 'images/hlgo.png' %}" alt="QuizBOT Logo">
+                <span>Quizbot</span>
+            </div>
+            <div class="auth-buttons">
+                <form action="/login/" method="get">
+                    <button class="btn btn-outline">Log in</button>
+                    <button class="btn btn-outline" id="signupBtn">Sign up</button>
+                </form>
+            </div>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <h1>WELCOME TO QUIZBOT</h1>
+                <form action="/login/" method="get">
+                    <button class="btn btn-large btn-primary" id="startQuizBtn">START QUIZ</button>
+                </form>
+            </section>
+
+            <section class="features">
+                <div class="feature">
+                    <div class="feature-content">
+                        <h2>Create and Host Quizzes</h2>
+                        <p>Easily create custom quizzes with multiple-choice questions. Generate a unique  6-digit code for each quiz to share with participants.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="{% static 'images/landing/img1.png' %}" height="300" width="400"  alt="Personalized Learning">
+                    </div>
+                </div>
+                <div class="feature reverse">
+                    <div class="feature-content">
+                        <h2>AI-Generated Quiz Questions</h2>
+                        <p>Leverage our AI to automatically generate multiple-choice questions based on your topic of choice. Just input your subject, and let the AI handle the rest!</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="{% static 'images/landing/img2.png' %}" height="300" width="400" alt="Diverse Quiz Topics">
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-content">
+                        <h2>Join Quizzes with a Room Code</h2>
+                        <p>Join any quiz by simply entering the code shared by the host. Compete with others and test your knowledge!</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="{% static 'images/landing/img3.png' %}" height="300" width="400" alt="Real-time Progress Tracking">
+                    </div>
+                </div>
+                <div class="feature reverse">
+                    <div class="feature-content">
+                        <h2>Editable Quizzes</h2>
+                        <p>Modify existing quizzes on the go with our easy-to-use editing tools. Update questions, correct answers, or quiz details at any time.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="{% static 'images/landing/img4.png' %}" height="300" width="400" alt="Real-time Progress Tracking">
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-content">
+                        <h2>Secure OTP Email Verification</h2>
+                        <p>Ensure secure access to quizzes with our built-in email verification system using One-Time Password (OTP) authentication.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="{% static 'images/landing/img5.png' %}" height="300" width="400" alt="Real-time Progress Tracking">
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Quizbot is dedicated to making learning fun and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">FB</a>
+                        <a href="#" class="social-icon">TW</a>
+                        <a href="#" class="social-icon">IG</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 Quizbot. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="signup-popup" id="signupPopup">
+        <h1>Sign up as</h1>
+        <i class="fa-solid fa-xmark fa-lg" id="closeSignupPopup"></i>
+        <div class="option">
+            <a href="/student/signup/">Sign up as Student</a>
+        </div>
+        <div class="option">
+            <a href="/teacher/signup/">Sign up as Teacher</a>
+        </div>
+    </div>
+
+    <script src="{% static 'JavaScript/landing2.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+</body>
+</html>
