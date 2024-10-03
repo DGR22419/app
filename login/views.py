@@ -33,7 +33,8 @@ def verify_otp(request):
                 first_name=user_data['first_name'],
                 last_name=user_data['last_name'],
                 email=user_data['email'],
-                prn=user_data.get('prn', ''),  # Only for students
+                prn=user_data.get('prn', ''), 
+                gender = user_data.get('gender') ,
                 password=make_password(user_data['password']),  # Hash the password
                 is_student=user_data.get('is_student', False),  # Set based on signup type
                 is_teacher=user_data.get('is_teacher', False),  # Set based on signup type
@@ -68,6 +69,7 @@ def student_signup(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
             prn = form.cleaned_data.get('prn')
+            gender = form.cleaned_data['gender']
             
             # Store user details in the session temporarily
             request.session['user_data'] = {
@@ -75,6 +77,7 @@ def student_signup(request):
                 'last_name': last_name,
                 'email': email,
                 'prn': prn,
+                'gender' : gender ,
                 'password': password,  # Optionally, hash the password now
                 'is_student': True,  # For student signup
             }
@@ -101,6 +104,7 @@ def teacher_signup(request):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
+            gender = form.cleaned_data['gender']
             
             # Store user details in the session temporarily
             request.session['user_data'] = {
@@ -108,6 +112,7 @@ def teacher_signup(request):
                 'last_name': last_name,
                 'email': email,
                 'prn': "",  # Teachers don’t need a PRN
+                'gender' : gender,
                 'password': password,  # Optionally, hash the password now
                 'is_teacher': True,  # For teacher signup
             }
