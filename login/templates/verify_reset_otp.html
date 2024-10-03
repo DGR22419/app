@@ -105,11 +105,18 @@
         <h2>Verify OTP</h2>
         <form method="post" class="otp-form">
             {% csrf_token %}
-            {% for message in messages %}
+            {% if messages %}
                 <div class="error">{{ message }}</div>
-            {% endfor %}
+            {% endif %}
+            <!-- {% if error %}
+                <div class="error">{{ message }}</div>
+            {% endif %} -->
+
+            {% if error %}
+                <p class="error" align="center">{{ error }}</p>
+            {% endif %}
             <div class="form-group">
-                <input type="text" name="otp" placeholder="Enter OTP" value="{{ request.POST.otp }}">
+                <input type="text" name="otp" id="otp" placeholder="Enter OTP" value="{{ request.POST.otp }}">
             </div>
             <button type="submit">Verify OTP</button>
         </form>

@@ -397,20 +397,30 @@ def forgot_password(request):
     return render(request, 'forgot_password.html', {'form': form})
 
 def verify_reset_otp(request):
-    if request.method == 'POST':
-        otp = request.POST.get('otp')
-        user_otp = request.session.get('otp')
-        email = request.session.get('reset_password_email')
+    # if request.method == 'POST':
+    #     otp = request.POST.get('otp')
+    #     user_otp = request.session.get('otp')
+    #     email = request.session.get('reset_password_email')
 
-        if not email or not user_otp:
-            messages.error(request, "Session expired. Please try again.")
-            return render(request, 'verify_reset_otp.html')
+    #     if not email or not user_otp:
+    #         messages.error(request, "Session expired. Please try again.")
+    #         return render(request, 'verify_reset_otp.html')
+
+    #     if otp == user_otp:
+    #         # Redirect to password reset form
+    #         return redirect('reset_password')
+    #     else:
+    #         messages.error(request, "Invalid OTP. Please try again.")
+
+    if request.method == 'POST':
+        otp = request.POST.get('otp') 
+        user_otp = request.session.get('otp')        
 
         if otp == user_otp:
-            # Redirect to password reset form
+            request.session.pop('otp', None)
             return redirect('reset_password')
         else:
-            messages.error(request, "Invalid OTP. Please try again.")
+            return render(request, 'verify_reset_otp.html', {'error': 'Invalid OTP'})
 
     return render(request, 'verify_reset_otp.html')
 
