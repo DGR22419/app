@@ -233,6 +233,9 @@
 
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" value="{{ user.location }}" class="form-input"><br>
+                <span id="locationError"></span>
+
+                <br>
 
                 <label for="profile_picture">Profile Picture:</label>
                 <input type="file" id="profile_picture" name="profile_picture" class="form-input" onchange="previewImage(event)"><br>
@@ -249,10 +252,37 @@
     </div>
 
     <!-- JavaScript to Handle Modal Display and AJAX Submission -->
-    <script>
+    <!-- <script>
         const modal = document.getElementById('editProfileModal');
         const editBtn = document.getElementById('editProfileBtn');
         const closeBtn = document.getElementsByClassName('close')[0];
+
+        document.addEventListener('DOMContentLoaded', function() {
+          // Location validation
+          const locationInput = document.getElementById('location');
+          const locationError = document.getElementById('locationError');
+
+          if (locationInput) {
+                locationInput.addEventListener('input', function() {
+                    const locationValue = locationInput.value.trim();
+    
+                    if (locationValue === '') {
+                        locationError.textContent = 'Location is required.';
+                        locationError.style.color = 'red';
+                        locationInput.style.borderColor = 'red';
+                        locationInput.style.color = 'red';
+                    } else if (!/^[a-zA-Z\s]+$/.test(locationValue)) {
+                        locationError.textContent = 'Location should only contain letters and spaces.';
+                        locationError.style.color = 'red';
+                        locationInput.style.borderColor = 'red';
+                        locationInput.style.color = 'red';
+                    } else {
+                        locationError.textContent = '';
+                        locationInput.style.borderColor = 'green';
+                        locationInput.style.color = 'green';
+                    }
+                });
+            }
 
         editBtn.onclick = function() {
             modal.style.display = 'flex';
@@ -316,7 +346,119 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-    </script>
+    </script> -->
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const modal = document.getElementById('editProfileModal');
+          const editBtn = document.getElementById('editProfileBtn');
+          const closeBtn = document.getElementsByClassName('close')[0];
+  
+          // Ensure the modal, button, and close elements exist
+          if (editBtn && modal && closeBtn) {
+              editBtn.onclick = function() {
+                  modal.style.display = 'flex';
+              }
+  
+              closeBtn.onclick = function() {
+                  modal.style.display = 'none';
+              }
+  
+              window.onclick = function(event) {
+                  if (event.target == modal) {
+                      modal.style.display = 'none';
+                  }
+              }
+          }
+  
+          // Location validation
+          const locationInput = document.getElementById('location');
+          const locationError = document.getElementById('locationError');
+  
+          if (locationInput) {
+              locationInput.addEventListener('input', function() {
+                  const locationValue = locationInput.value.trim();
+  
+                  if (locationValue === '') {
+                      locationError.textContent = 'Location is required.';
+                      locationError.style.color = 'red';
+                      locationInput.style.borderColor = 'red';
+                      locationInput.style.color = 'red';
+                  } else if (!/^[a-zA-Z\s]+$/.test(locationValue)) {
+                      locationError.textContent = 'Location should only contain letters and spaces.';
+                      locationError.style.color = 'red';
+                      locationInput.style.borderColor = 'red';
+                      locationInput.style.color = 'red';
+                  } else {
+                      locationError.textContent = '';
+                      locationInput.style.borderColor = 'green';
+                      locationInput.style.color = 'green';
+                  }
+              });
+          }
+  
+          // Profile image preview
+          function previewImage(event) {
+              const reader = new FileReader();
+              reader.onload = function() {
+                  const output = document.getElementById('profile-img');
+                  output.src = reader.result;
+              }
+              reader.readAsDataURL(event.target.files[0]);
+          }
+  
+          // Custom alert box handling
+          function showAlert(message) {
+              const alertBox = document.getElementById('customAlert');
+              if (alertBox) {
+                  document.getElementById('alertMessage').innerText = message;
+                  alertBox.style.display = 'block';
+              }
+          }
+  
+          function closeAlert() {
+              const alertBox = document.getElementById('customAlert');
+              if (alertBox) {
+                  alertBox.style.display = 'none';
+              }
+          }
+  
+          // AJAX for profile update
+          const editProfileForm = document.getElementById('editProfileForm');
+          if (editProfileForm) {
+              editProfileForm.onsubmit = function(e) {
+                  e.preventDefault();
+                  const formData = new FormData(this);
+  
+                  fetch("{% url 'edit_profile' %}", {
+                          method: "POST",
+                          body: formData,
+                          headers: {
+                              "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                          },
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.status === 'success') {
+                              showAlert('Profile updated successfully!');
+                              modal.style.display = 'none';
+                              setTimeout(() => {
+                                  location.reload();
+                              }, 2000); // reload after a delay
+                          } else {
+                              showAlert('Error: ' + JSON.stringify(data.errors));
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error:', error);
+                          showAlert('An error occurred while updating your profile.');
+                      });
+              }
+          }
+      });
+  </script>
+  
+
 
 </body>
 
