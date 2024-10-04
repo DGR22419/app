@@ -128,6 +128,10 @@ def ai_select(request):
 def ai_create_quiz(request):
     if request.method == 'POST':
         title = request.POST.get('title')
+        show_results_to_student = request.POST.get('show_results_to_student') == 'on'  # Checkbox for showing results
+        duration = request.POST.get('duration')
+        is_active = request.POST.get('is_active') == 'on'
+        
         questions = request.POST.getlist('questions')
         options = request.POST.getlist('options')
         correct_options = request.POST.getlist('correct_options')
@@ -176,7 +180,15 @@ def ai_create_quiz(request):
             return HttpResponseBadRequest("Mismatch in the number of images after filtering.")
 
         # Create the quiz
-        quiz = Quiz.objects.create(title=title, host=request.user)
+        # quiz = Quiz.objects.create(title=title, host=request.user)
+
+        quiz = Quiz.objects.create(
+            title=title, 
+            host=request.user,
+            show_results_to_student=show_results_to_student,
+            duration=duration,
+            is_active=is_active
+        )
 
         for i in range(num_questions):
             Question.objects.create(
