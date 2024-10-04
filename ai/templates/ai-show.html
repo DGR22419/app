@@ -129,6 +129,18 @@
             <div class="quiz-title">
                 <label for="quizTitle">Quiz Title:</label>
                 <input type="text" id="quizTitle" name="title" placeholder="Enter quiz title" value="My Ai quiz" required>
+                <label for="duration">Duration (minutes):</label>
+                <div class="options-container">
+                    <input type="number" name="duration" id="duration" value="1" min="1" class="option" required>
+                </div>
+                <label for="show_results_to_student">Show results to students:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="show_results_to_student" id="show_results_to_student" checked>
+                </div>
+                <label for="is_active">Quiz is Active:</label>
+                <div class="options-container">
+                    <input type="checkbox" name="is_active" id="is_active" checked>
+                </div> 
             </div>
 
             <div id="question-list">
