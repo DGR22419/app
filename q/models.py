@@ -35,7 +35,7 @@ class Quiz(models.Model):
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     show_results_to_student = models.BooleanField(default=True)  # Show results or not
-    duration = models.IntegerField(default=30)  # Duration in minutes
+    duration = models.IntegerField(default=2)  # Duration in minutes
     is_active = models.BooleanField(default=True)  # Whether the quiz is active or not
 
     def save(self, *args, **kwargs):
